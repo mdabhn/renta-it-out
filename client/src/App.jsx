@@ -1,7 +1,19 @@
 import React from 'react'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import FourZeroFour from './pages/FourZeroFour'
+import Home from './pages/Home'
 
 const App = () => {
-  return <div>App</div>
+  return (
+    <>
+      <BrowserRouter>
+        <Routes>
+          <Route path='/' element={<Home />} />
+          <Route path='/*' element={<FourZeroFour />} />
+        </Routes>
+      </BrowserRouter>
+    </>
+  )
 }
 
 export default App
