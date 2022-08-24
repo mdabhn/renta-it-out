@@ -1,10 +1,12 @@
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 
 import { Table, Tag } from 'antd'
+import { MainContext } from '../App'
 
 const TableView = () => {
+  const { data, setData } = useContext(MainContext)
   const [loading, setLoading] = useState(true)
-  const [productData, setProductData] = useState([])
+  // const [productData, setProductData] = useState([])
 
   const columns = [
     {
@@ -85,7 +87,8 @@ const TableView = () => {
       .then((res) => res.json())
       .then((res) => {
         if (res.status === 200) {
-          setProductData(res.data)
+          setData(res.data)
+          // setProductData(res.data)
         } else {
           alert('Error while fetching')
         }
@@ -95,7 +98,7 @@ const TableView = () => {
         console.log(err)
         setLoading(false)
       })
-  }, [])
+  }, [setData])
 
   const onChange = (pagination, filters, sorter, extra) => {
     // console.log('params', pagination, filters, sorter, extra)
@@ -106,9 +109,12 @@ const TableView = () => {
       <Table
         columns={columns}
         rowKey={(data) => data.code}
-        dataSource={productData}
+        dataSource={data}
         onChange={onChange}
         loading={loading}
+        pagination={{
+          pageSize: 5,
+        }}
       />
     </div>
   )
