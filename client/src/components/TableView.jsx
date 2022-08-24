@@ -6,7 +6,6 @@ import { MainContext } from '../App'
 const TableView = () => {
   const { data, setData } = useContext(MainContext)
   const [loading, setLoading] = useState(true)
-  // const [productData, setProductData] = useState([])
 
   const columns = [
     {
@@ -35,7 +34,7 @@ const TableView = () => {
       title: 'Availability',
       dataIndex: 'availability',
       sorter: {
-        compare: (a, b) => a.availability.localeCompare(b.availability),
+        compare: (a, b) => a.availability - b.availability,
       },
       render: (data) => {
         return (
@@ -113,7 +112,7 @@ const TableView = () => {
         onChange={onChange}
         loading={loading}
         pagination={{
-          pageSize: 5,
+          pageSize: 10,
         }}
       />
     </div>
