@@ -7,8 +7,17 @@ export const MainContext = createContext()
 
 const App = () => {
   const [tableData, setTableData] = useState([])
+  const [searchContext, setSearchContext] = useState('')
+
   return (
-    <MainContext.Provider value={{ data: tableData, setData: setTableData }}>
+    <MainContext.Provider
+      value={{
+        data: tableData,
+        setData: setTableData,
+        searchContext,
+        setSearchContext,
+      }}
+    >
       <BrowserRouter>
         <Routes>
           <Route path='/' element={<Home />} />

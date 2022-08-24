@@ -4,8 +4,9 @@ import { Table, Tag } from 'antd'
 import { MainContext } from '../App'
 
 const TableView = () => {
-  const { data, setData } = useContext(MainContext)
+  const { data, setData, searchContext } = useContext(MainContext)
   const [loading, setLoading] = useState(true)
+  const [productData, setProductData] = useState([])
 
   const columns = [
     {
@@ -87,7 +88,7 @@ const TableView = () => {
       .then((res) => {
         if (res.status === 200) {
           setData(res.data)
-          // setProductData(res.data)
+          setProductData(res.data)
         } else {
           alert('Error while fetching')
         }
@@ -99,6 +100,18 @@ const TableView = () => {
       })
   }, [setData])
 
+  useEffect(() => {
+    if (searchContext.length !== 0) {
+      setProductData(
+        data.filter((d) =>
+          d.name.toLowerCase().includes(searchContext.toLowerCase())
+        )
+      )
+    } else {
+      setProductData(data)
+    }
+  }, [searchContext, data])
+
   const onChange = (pagination, filters, sorter, extra) => {
     // console.log('params', pagination, filters, sorter, extra)
   }
@@ -108,7 +121,7 @@ const TableView = () => {
       <Table
         columns={columns}
         rowKey={(data) => data.code}
-        dataSource={data}
+        dataSource={productData}
         onChange={onChange}
         loading={loading}
         pagination={{
