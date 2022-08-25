@@ -1,6 +1,7 @@
-const express = require('express')
+import express from 'express'
+import data from '../data/data.json' assert { type: 'json' }
+
 const Router = express.Router()
-const data = require('../data/data.json')
 
 // sending all available product data
 Router.get('/', (_, res) => {
@@ -12,4 +13,4 @@ Router.get('/', (_, res) => {
   })
 })
 
-module.exports = Router
+export default Router
