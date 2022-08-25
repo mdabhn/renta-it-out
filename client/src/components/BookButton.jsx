@@ -9,6 +9,7 @@ const BookButton = () => {
   const [visible, setVisible] = useState(false)
   const [confirmVisible, setConfirmVisible] = useState(false)
   const [confirmButtonDisabled, setConfirmButtonDisabled] = useState(true)
+  const [btnDisabled, setBtnDisabled] = useState(false)
 
   const showModal = () => {
     setVisible(true)
@@ -23,6 +24,7 @@ const BookButton = () => {
   }
 
   const handleBooking = () => {
+    setBtnDisabled(true)
     fetch(`${process.env.REACT_APP_BASE_URL}/v1/rental/book`, {
       method: 'post',
       headers: {
@@ -41,6 +43,11 @@ const BookButton = () => {
           setVisible(false)
           message.success('Your Booking has been placed')
         }
+        setBtnDisabled(false)
+      })
+      .catch((err) => {
+        setBtnDisabled(false)
+        console.log(err)
       })
   }
 
@@ -62,6 +69,7 @@ const BookButton = () => {
           onClick: () => {
             handleBooking()
           },
+          disabled: btnDisabled,
         }}
         onCancel={handleCancelConfirm}
         okText={'Confirm'}
