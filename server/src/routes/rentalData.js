@@ -36,7 +36,8 @@ Router.post('/book', async (req, res) => {
 
     if (docSnap.exists()) {
       await updateDoc(docRef, {
-        availability: false,
+        availability: true,
+        booked: true,
         rentedFrom: from,
         rentedTo: to,
         rent: rent,

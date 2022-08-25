@@ -37,10 +37,10 @@ const TableView = () => {
       sorter: {
         compare: (a, b) => a.availability - b.availability,
       },
-      render: (data) => {
+      render: (data, _) => {
         return (
           <>
-            {data ? (
+            {data && !_.booked ? (
               <Tag color={'green'}>Availavle</Tag>
             ) : (
               <Tag color={'red'}>Not-Availavle</Tag>

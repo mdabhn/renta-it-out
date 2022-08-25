@@ -8,8 +8,8 @@ const runSeeder = () => {
       ...d,
     })
     console.log(i)
+    if (i === data.length - 1) process.exit(0)
   })
-  process.exit(0)
 }
 
 runSeeder()
