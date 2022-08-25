@@ -12,7 +12,7 @@ app.use(express.json())
 app.use(cors()) /* To avoid cros-site error */
 
 /** Importing Routes */
-app.use('/v1/rental/data', RentRouts)
+app.use('/v1/rental', RentRouts)
 
 app.get('/', (_, res) => {
   res.send('running...')

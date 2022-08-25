@@ -8,6 +8,14 @@ export const MainContext = createContext()
 const App = () => {
   const [tableData, setTableData] = useState([])
   const [searchContext, setSearchContext] = useState('')
+  const [bookingInfo, setBookingInfo] = useState({
+    id: null,
+    name: null,
+    from: null,
+    to: null,
+    rent: null,
+    duration: null,
+  })
 
   return (
     <MainContext.Provider
@@ -16,6 +24,8 @@ const App = () => {
         setData: setTableData,
         searchContext,
         setSearchContext,
+        bookingInfo,
+        setBookingInfo,
       }}
     >
       <BrowserRouter>
