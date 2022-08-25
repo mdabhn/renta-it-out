@@ -1,10 +1,10 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { Button, Modal } from 'antd'
+import { Button, message, Modal } from 'antd'
 import SelectComponent from './SelectComponent'
 import { MainContext } from '../App'
 
 const BookButton = () => {
-  const { bookingInfo } = useContext(MainContext)
+  const { bookingInfo, setUpdate, update } = useContext(MainContext)
 
   const [visible, setVisible] = useState(false)
   const [confirmVisible, setConfirmVisible] = useState(false)
@@ -35,7 +35,12 @@ const BookButton = () => {
     })
       .then((res) => res.json())
       .then((res) => {
-        console.log(res)
+        if (res.status === 201) {
+          setUpdate(!update)
+          setConfirmVisible(false)
+          setVisible(false)
+          message.success('Your Booking has been placed')
+        }
       })
   }
 

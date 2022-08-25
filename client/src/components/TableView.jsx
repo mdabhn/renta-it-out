@@ -4,7 +4,7 @@ import { Table, Tag } from 'antd'
 import { MainContext } from '../App'
 
 const TableView = () => {
-  const { data, setData, searchContext } = useContext(MainContext)
+  const { data, setData, searchContext, update } = useContext(MainContext)
   const [loading, setLoading] = useState(true)
   const [productData, setProductData] = useState([])
 
@@ -98,7 +98,7 @@ const TableView = () => {
         console.log(err)
         setLoading(false)
       })
-  }, [setData])
+  }, [setData, update])
 
   useEffect(() => {
     if (searchContext.length !== 0) {

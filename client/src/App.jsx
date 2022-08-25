@@ -16,6 +16,7 @@ const App = () => {
     rent: null,
     duration: null,
   })
+  const [contentUpdated, setContentUpdated] = useState(false)
 
   return (
     <MainContext.Provider
@@ -26,6 +27,8 @@ const App = () => {
         setSearchContext,
         bookingInfo,
         setBookingInfo,
+        update: contentUpdated,
+        setUpdate: setContentUpdated,
       }}
     >
       <BrowserRouter>
